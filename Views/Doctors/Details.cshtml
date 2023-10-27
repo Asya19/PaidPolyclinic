@@ -1,0 +1,87 @@
+﻿@model PaidPolyclinic.Models.Doctor
+
+@{
+    ViewBag.Title = "Детали";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Врач</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Фамилия
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            Имя
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            Отчество
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MiddleName)
+        </dd>
+
+        <dt>
+            Фото
+        </dt>
+
+        <dd>
+
+            @{ byte[] photo = Model.Image;
+                string imageSrc = null;
+                if (photo != null)
+                {
+                    MemoryStream ms = new MemoryStream();
+                    ms.Write(photo, 0, photo.Length);
+                    string imageBase64 = Convert.ToBase64String(ms.ToArray());
+                    imageSrc = string.Format("data:image/jpg;base64,{0}", imageBase64);
+                    string base64String = Convert.ToBase64String(photo, 0, photo.Length);
+                }
+            }
+
+            <img src="@imageSrc" alt="Image" width="150" height="100" />
+
+
+
+            @*"data:image/jpg;base64,{0}"
+        <img src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Image))" alt="Image" width="150" height="100">*@
+            @*<img src="data:image/jpg;base64,@(Convert.ToBase64String(Model.Image))" alt="Image" width="150" height="100">*@
+
+            @*@Html.DisplayFor(model => model.Image)*@
+        </dd>
+
+        <dt>
+            Категория
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.CategoryName)
+        </dd>
+
+        <dt>
+            Специальность
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Specialization.SpecializationName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("<< Назад к списку", "Index")
+</p>

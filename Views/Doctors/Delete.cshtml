@@ -1,0 +1,70 @@
+﻿@model PaidPolyclinic.Models.Doctor
+
+@{
+    ViewBag.Title = "Удаление";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Вы действителньо хотите удалить это?</h3>
+<div>
+    <h4>Врач</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Фамилия</dt>
+
+        <dd>@Html.DisplayFor(model => model.LastName)</dd>
+
+        <dt>Имя</dt>
+
+        <dd>@Html.DisplayFor(model => model.FirstName)</dd>
+
+        <dt>Отчество</dt>
+
+        <dd>@Html.DisplayFor(model => model.MiddleName)</dd>
+
+        <dt>Фото</dt>
+
+        <dd>
+            @{ byte[] photo = Model.Image;
+                string imageSrc = null;
+                if (photo != null)
+                {
+                    MemoryStream ms = new MemoryStream();
+                    ms.Write(photo, 0, photo.Length);
+                    string imageBase64 = Convert.ToBase64String(ms.ToArray());
+                    imageSrc = string.Format("data:image/jpg;base64,{0}", imageBase64);
+                    string base64String = Convert.ToBase64String(photo, 0, photo.Length);
+                }
+            }
+            <img src="@imageSrc" alt="Image" width="150" height="auto" />
+        </dd>
+
+        <dt>
+            Категория
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.CategoryName)
+        </dd>
+
+        <dt>
+            Спеициальность
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Specialization.SpecializationName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("<< Назад к списку", "Index")
+        </div>
+    }
+</div>

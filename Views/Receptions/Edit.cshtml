@@ -1,0 +1,82 @@
+﻿@model PaidPolyclinic.Models.Reception
+
+@{
+    ViewBag.Title = "Редактировать";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Обращение</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Дата обращения</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ReceptionDate, new { htmlAttributes = new { @class = "form-control", type = "datetime-local" } })
+            @Html.ValidationMessageFor(model => model.ReceptionDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Фамилия врача</label>
+        <div class="col-md-10">
+            @Html.DropDownList("DoctorID", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DoctorID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @*<div class="form-group">
+            <label class="control-label col-md-2">Специальность</label>
+            <div class="col-md-10">
+                @Html.DropDownList("DoctorID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DoctorID, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Фамилия пациента</label>
+        <div class="col-md-10">
+            @Html.DropDownList("PatientID", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.PatientID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Диагноз</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Diagnosis, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Diagnosis, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Стоимость лечения</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Сохранить" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("<< Назад к списку", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

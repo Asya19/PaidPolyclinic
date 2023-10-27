@@ -1,0 +1,57 @@
+﻿@model PaidPolyclinic.Models.Patient
+
+@{
+    ViewBag.Title = "Удаление";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Вы действителньо хотите удалить это?</h3>
+<div>
+    <h4>Пациент</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Фамилия
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            Имя
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            Отчество
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MiddleName)
+        </dd>
+
+        <dt>
+            Дата рождения
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfBirth)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("<< Назад к списку", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,50 @@
+﻿@model PaidPolyclinic.Models.Patient
+
+@{
+    ViewBag.Title = "Детали";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Пациент</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Фамилия
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            Имя
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            Отчество
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MiddleName)
+        </dd>
+
+        <dt>
+            Дата рождения
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfBirth)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("<< Назад к списку", "Index")
+</p>

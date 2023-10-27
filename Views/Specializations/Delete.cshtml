@@ -1,0 +1,42 @@
+﻿@model PaidPolyclinic.Models.Specialization
+
+@{
+    ViewBag.Title = "Удалить";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Вы действительно хотите удалить это?</h3>
+
+<div>
+    <h4>Специализация</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Название специализации
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpecializationName)
+        </dd>
+
+        <dt>
+            Описание специализации
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+<div class="form-actions no-color">
+    <input type="submit" value="Удалить" class="btn btn-default" /> |
+    @Html.ActionLink("<< Назад к списку", "Index")
+</div>
+    }
+</div>

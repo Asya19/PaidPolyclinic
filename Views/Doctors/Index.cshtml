@@ -1,0 +1,60 @@
+﻿@model IEnumerable<PaidPolyclinic.Models.Doctor>
+
+@{ ViewBag.Title = "Список врачей";}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Создать карточку врача", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>Фамилия</th>
+        <th> Имя</th>
+        <th>Отчество</th>
+        <th> Фото</th>
+        <th>Категория</th>
+        <th>Специальность</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MiddleName)
+            </td>
+            <td>
+                @{ byte[] photo = item.Image;
+                    string imageSrc = null;
+                    if (photo != null)
+                    {
+                        MemoryStream ms = new MemoryStream();
+                        ms.Write(photo, 0, photo.Length);
+                        string imageBase64 = Convert.ToBase64String(ms.ToArray());
+                        imageSrc = string.Format("data:image/jpg;base64,{0}", imageBase64);
+                        string base64String = Convert.ToBase64String(photo, 0, photo.Length);
+                    }
+                }
+                <img src="@imageSrc" alt="Image" width="150" height="auto" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Specialization.SpecializationName)
+            </td>
+            <td>
+                @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Подробнее", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>

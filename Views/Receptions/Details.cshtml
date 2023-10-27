@@ -1,0 +1,58 @@
+﻿@model PaidPolyclinic.Models.Reception
+
+@{
+    ViewBag.Title = "Детали";
+}
+
+<h2><h2>@ViewBag.Title</h2></h2>
+
+<div>
+    <h4>Обращение</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Дата обращения
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReceptionDate)
+        </dd>
+
+        <dt>
+            Фамилия врача
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Doctor.LastName)
+        </dd>
+
+        <dt>
+            Фамилия пациента
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patient.LastName)
+        </dd>
+
+        <dt>
+            Диагноз
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Diagnosis)
+        </dd>
+
+        <dt>
+            Стоимость лечения
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("<< Назад к списку", "Index")
+</p>

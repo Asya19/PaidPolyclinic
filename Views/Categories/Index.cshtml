@@ -1,0 +1,39 @@
+﻿@model IEnumerable<PaidPolyclinic.Models.Category>
+
+@{
+    ViewBag.Title = "Список категорий";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Добавить категорию", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Категория
+        </th>
+        <th>
+            Ставка, %
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bet)
+        </td>
+        <td>
+            @Html.ActionLink("Редактировать", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Подробнее", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
