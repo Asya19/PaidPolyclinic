@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PaidPolyclinic.Models;
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using PaidPolyclinic.Models;
 
 namespace PaidPolyclinic.Controllers
 {
@@ -23,8 +21,7 @@ namespace PaidPolyclinic.Controllers
                            select s;
             if (!String.IsNullOrEmpty(searchString))
             {
-                patients = patients.Where(s => s.FirstName.Contains(searchString)
-                                       || s.MiddleName.Contains(searchString));
+                patients = patients.Where(s => s.FirstName.Contains(searchString));
             }
             switch (sortOrder)
             {
@@ -45,7 +42,7 @@ namespace PaidPolyclinic.Controllers
             return View(patients.ToList());
         }
 
-        // GET: Patients/Details/5
+        // GET: Patients/Details/5  // Отображение деталей карточки пациента
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -60,13 +57,13 @@ namespace PaidPolyclinic.Controllers
             return View(patient);
         }
 
-        // GET: Patients/Create
+        // GET: Patients/Create // Отображение формы для создания пациента
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Patients/Create
+        // POST: Patients/Create  // Сохранение в БД информации о пациента
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,LastName,FirstName,MiddleName,DateOfBirth")] Patient patient)
@@ -81,7 +78,7 @@ namespace PaidPolyclinic.Controllers
             return View(patient);
         }
 
-        // GET: Patients/Edit/5
+        // GET: Patients/Edit/5 // Отображение формы редактирования пациента
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -96,9 +93,7 @@ namespace PaidPolyclinic.Controllers
             return View(patient);
         }
 
-        // POST: Patients/Edit/5
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. 
-        // Дополнительные сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Patients/Edit/5 // Сохранение изменений информации о пациенте в БД
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,LastName,FirstName,MiddleName,DateOfBirth")] Patient patient)
@@ -112,7 +107,7 @@ namespace PaidPolyclinic.Controllers
             return View(patient);
         }
 
-        // GET: Patients/Delete/5
+        // GET: Patients/Delete/5 // Отображение предупридительного окна с информаией, которую необходимо удалить
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -127,7 +122,7 @@ namespace PaidPolyclinic.Controllers
             return View(patient);
         }
 
-        // POST: Patients/Delete/5
+        // POST: Patients/Delete/5 // Удаление пациента из БД
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

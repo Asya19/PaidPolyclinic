@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using PaidPolyclinic.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using PaidPolyclinic.Models;
 
 namespace PaidPolyclinic.Controllers
 {
@@ -14,13 +10,13 @@ namespace PaidPolyclinic.Controllers
     {
         private PaidPolyclinicDBEntities db = new PaidPolyclinicDBEntities();
 
-        // GET: Specializations
+        // GET: Specializations // Отображение списка всех специальностей
         public ActionResult Index()
         {
             return View(db.Specializations.ToList());
         }
 
-        // GET: Specializations/Details/5
+        // GET: Specializations/Details/5 // Отображение деталей специальности
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -35,15 +31,13 @@ namespace PaidPolyclinic.Controllers
             return View(specialization);
         }
 
-        // GET: Specializations/Create
+        // GET: Specializations/Create // Отображение формы для создания специальности
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Specializations/Create
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. 
-        // Дополнительные сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Specializations/Create // Сохранение в БД информации о специальности
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,SpecializationName,Description")] Specialization specialization)
@@ -58,7 +52,7 @@ namespace PaidPolyclinic.Controllers
             return View(specialization);
         }
 
-        // GET: Specializations/Edit/5
+        // GET: Specializations/Edit/5  // Отображение формы редактирования специальности
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,9 +67,7 @@ namespace PaidPolyclinic.Controllers
             return View(specialization);
         }
 
-        // POST: Specializations/Edit/5
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. 
-        // Дополнительные сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Specializations/Edit/5 // Сохранение изменений информации о специальности в БД
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,SpecializationName,Description")] Specialization specialization)
@@ -89,7 +81,7 @@ namespace PaidPolyclinic.Controllers
             return View(specialization);
         }
 
-        // GET: Specializations/Delete/5
+        // GET: Specializations/Delete/5 // Отображение предупридительного окна с информаией, которую необходимо удалить
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -104,7 +96,7 @@ namespace PaidPolyclinic.Controllers
             return View(specialization);
         }
 
-        // POST: Specializations/Delete/5
+        // POST: Specializations/Delete/5 // Удаление специальности из БД
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
